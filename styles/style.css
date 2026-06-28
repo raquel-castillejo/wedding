@@ -1,0 +1,350 @@
+:root {
+  /* FONT STYLES */
+  /* *********** */
+
+  /* Fonts */
+  --main-font: "Alegreya Sans";
+  --caps-font: "Alegreya Sans SC";
+  --signature-font: "Italianno";
+
+  /* font size */
+  --font-size-base: 28px;
+
+  /* mobile typescale: 1.125x */
+  --font-size-xs: 0.79rem; /* 22.12px */
+  --font-size-s: 0.889rem; /* 24.89px */
+  --font-size-m: 1rem; /* 28px */
+  --font-size-l: 1.125rem; /* 31.5px */
+  --font-size-xl: 1.266rem; /* 35.44px */
+  --font-size-2xl: 1.424rem; /* 39.87px */
+  --font-size-3xl: 1.602rem; /* 44.85px */
+  --font-size-4xl: 1.802rem; /* 50.46px */
+  --font-size-5xl: 2.027rem; /* 56.76px */
+  --font-size-6xl: 2.56rem; /* gap of 2x - 71.68px */
+
+  /* typescale */
+  --signature-type-size: var(--font-size-5xl);
+
+  /* -- */
+
+  /* COLOR STYLES */
+  /* *********+** */
+
+  /* colors */
+  --light-pink: #fdf1ec;
+  --dark-pink: #7e0b58;
+
+  /* element colors */
+  --card-bg-color: var(--light-pink);
+
+  /* SPACE STYLES */
+  /* **********+* */
+
+  --space-xs: 4px;
+  --space-s: 8px;
+  --space-m: 16px;
+  --space-l: 32px;
+  --space-xl: 64px;
+  --space-2xl: 80px;
+}
+
+* {
+  padding: 0;
+  border: 0;
+  margin: 0;
+
+  box-sizing: border-box;
+}
+
+html {
+  font-family: var(--main-font), sans-serif;
+  font-size: var(--font-size-base);
+}
+
+body {
+  position: relative;
+  background-color: hsl(18, 81%, 98%);
+  text-align: center;
+}
+
+body::before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100dvw;
+  height: 100dvh;
+
+  background-image: url(../assets/img/paper-texture.jpg);
+  background-position: 0 0;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  mix-blend-mode: multiply;
+  opacity: 80%;
+}
+
+.clip-mask {
+  position: absolute;
+  top: -99px;
+  left: -99px;
+  width: 0;
+  height: 0;
+}
+
+.main {
+  position: relative;
+}
+
+.main__menu-language {
+  display: flex;
+  height: 100dvh;
+  width: 100%;
+
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-xl);
+}
+
+.main__menu-language::before {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+
+  background-color: var(--dark-pink);
+  opacity: 0.6;
+}
+
+.main::after {
+  content: "";
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 0;
+
+  height: 100vh;
+  width: 100vw;
+  z-index: -1;
+
+  background-image: url(../assets/img/hydrangeas-1000px.jpg);
+  background-position: -90dvw -20dvh;
+  background-repeat: no-repeat;
+  background-size: calc(100dvh + 100dvw) calc(100dvh + 100dvw);
+
+  mask-image: linear-gradient(black 45%, transparent 100%);
+}
+
+.main__menu-language::after {
+  filter: blur(4px);
+}
+
+.language-card {
+  display: flex;
+  width: calc(100dvw - (var(--space-s) * 2));
+  max-width: 384px;
+  height: 182px;
+
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-s);
+
+  /* to add the clip mask: https://www.youtube.com/watch?v=StsPKN3M-Bg */
+  clip-path: url(#clip-card-frame);
+  background-color: var(--card-bg-color);
+
+  text-decoration: none;
+  font-size: var(--font-size-l);
+  color: black;
+}
+
+.language-card:last-child {
+  clip-path: url(#clip-card-frame-rotated);
+}
+
+.language-card__xs {
+  width: 64px;
+  height: 72px;
+  clip-path: url(#clip-card-frame-xs);
+
+  position: fixed;
+  top: var(--space-s);
+  right: var(--space-s);
+  z-index: 3;
+}
+
+.language-flag {
+  width: 42px;
+}
+
+.language-flag__xs {
+  width: 36px;
+}
+
+/* SECTION: SAVE THE DATE LETTER AND ENVELOPE */
+/* ****************************************** */
+
+.letter-banner {
+  height: 100dvh;
+  position: relative;
+}
+
+.envelope-container {
+  width: calc(100dvw - var(--space-m));
+  max-width: 386px;
+
+  position: absolute;
+  top: calc(50dvh - (276px / 2));
+  left: var(--space-s);
+}
+
+.envelope {
+  width: 100%;
+}
+
+.envelope-top-front {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.envelope-top-back {
+  display: none;
+  position: absolute;
+  /* calc
+     envelope width: (100dvw - var(--space-m));
+     envelope height: (100dvw - var(--space-m)) / 1.4
+  */
+  bottom: calc((100dvw - var(--space-m)) / 1.4);
+  left: 0;
+}
+
+.letter {
+  display: block;
+  background-image: url(../assets/img/card.png);
+  background-size: 100% 100%;
+  border-radius: 18px;
+
+  width: calc(100dvw - var(--space-m));
+  max-width: 378px;
+  left: var(--space-s);
+  top: var(--space-2xl);
+
+  position: relative;
+  padding: var(--space-2xl) var(--space-m);
+  z-index: 1;
+}
+
+.letter_title {
+  font-family: var(--caps-font);
+  text-transform: lowercase;
+  font-size: var(--font-size-xs);
+  font-weight: 400;
+
+  margin-bottom: calc(var(--space-s) + var(--space-m));
+}
+
+.letter_date {
+  font-size: var(--font-size-xs);
+  font-weight: 400;
+}
+
+.letter_place {
+  font-size: var(--font-size-xs);
+  font-weight: 400;
+  margin-bottom: var(--space-l);
+}
+
+.letter_names {
+  font-family: var(--signature-font);
+  font-size: var(--font-size-6xl);
+  line-height: calc(var(--font-size-6xl) * 0.8);
+  font-weight: 400;
+  letter-spacing: 0.02rem;
+
+  margin-bottom: calc(var(--space-s) + var(--space-m));
+}
+
+.letter_text {
+  font-family: var(--main-font);
+  font-style: italic;
+  font-size: var(--font-size-s);
+  margin-bottom: var(--space-m);
+}
+
+.hint-to-action {
+  position: absolute;
+  bottom: 0;
+
+  display: block;
+  width: 100%;
+  padding-top: var(--space-xl);
+  padding-bottom: var(--space-m);
+  z-index: 2;
+
+  font-size: var(--font-size-l);
+  font-family: var(--caps-font);
+  text-transform: lowercase;
+  line-height: var(--font-size-l);
+
+  background: linear-gradient(
+    transparent 0,
+    var(--light-pink) 45%,
+    var(--light-pink) 100%
+  );
+
+  display: none;
+}
+
+.hint-to-action__tap {
+  margin-bottom: var(--space-m);
+}
+
+.hint-to-action__scroll {
+  display: none;
+}
+
+.signature {
+  font-family: var(--signature-font);
+}
+
+/* ------------------------------- */
+/* ------------------------------- */
+/* ------------------------------- */
+
+/* BREAKPOINTS */
+/* *********** */
+
+@media screen and (min-width: 680px) {
+  * {
+    /* desktop typescale: 1.2x */
+    --font-size-xs: 0.694rem; /* 19.44px */
+    --font-size-s: 0.833rem; /* 23.33px */
+    --font-size-m: 1rem; /* 28px */
+    --font-size-l: 1.2rem; /* 33.6px */
+    --font-size-xl: 1.44rem; /* 40.32px */
+    --font-size-2xl: 1.728rem; /* 48.38px */
+    --font-size-3xl: 2.074rem; /* 58.06px */
+    --font-size-4xl: 2.488rem; /* 69.67px */
+    --font-size-5xl: 2.986rem; /* 83.61px */
+  }
+
+  .main:after {
+    background-image: url(../assets/img/hydrangeas-2000px.jpg);
+    background-position: -35dvw -35dvh;
+  }
+
+  .language-card {
+    max-width: 670px;
+    height: 244px;
+    clip-path: url(#clip-card-frame-lg);
+  }
+
+  .language-card:last-child {
+    clip-path: url(#clip-card-frame-rotated-lg);
+  }
+}
