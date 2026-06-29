@@ -64,13 +64,15 @@ html {
 body {
   position: relative;
   background-color: hsl(18, 81%, 98%);
+  overflow-x: hidden;
+
   text-align: center;
 }
 
 body::before {
   content: "";
   display: block;
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100dvw;
@@ -79,7 +81,7 @@ body::before {
   background-image: url(../assets/img/paper-texture.jpg);
   background-position: 0 0;
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: 100%;
 
   mix-blend-mode: multiply;
   opacity: 80%;
@@ -194,12 +196,25 @@ body::before {
 }
 
 .envelope-container {
-  width: calc(100dvw - var(--space-m));
-  max-width: 386px;
+  /* width: calc(100dvw - var(--space-m));
+  max-width: 386px; */
+
+  width: 386px;
 
   position: absolute;
   top: calc(50dvh - (276px / 2));
-  left: var(--space-s);
+  right: var(--space-s);
+
+  /* ── Solapa frontal: necesita perspectiva para rotar en 3D ─────────────────── */
+  perspective: 800px; /* Añadir al bloque existente */
+}
+
+/* ── Posición final del sobre (mobile) ─────────────────────────────────────── */
+.envelope-container--final-position {
+  left: 50%;
+  right: unset;
+  transform: translateX(-50%);
+  /* top puedes ajustarlo si quieres subirlo al abrirse */
 }
 
 .envelope {
@@ -210,17 +225,30 @@ body::before {
   position: absolute;
   top: 0;
   left: 0;
+
+  /* ── Solapa CERRADA: pivota desde su borde inferior (la punta del triángulo) ── */
+  transform-origin: top center;
+  transform-style: preserve-3d;
+  /* backface-visibility: hidden;
+  /* quita el transform: rotateX(-180deg) si lo tenías de antes */
+  transform: rotateX(0deg);
 }
 
 .envelope-top-back {
-  display: none;
   position: absolute;
-  /* calc
-     envelope width: (100dvw - var(--space-m));
-     envelope height: (100dvw - var(--space-m)) / 1.4
-  */
-  bottom: calc((100dvw - var(--space-m)) / 1.4);
+  bottom: 285px;
+
   left: 0;
+
+  /* ── Solapa ABIERTA: mismo pivote, empieza oculta ──────────────────────────── */
+
+  transform-origin: bottom center;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  opacity: 0;
+  transform: rotateX(
+    0deg
+  ); /* posición de reposo — JS la sobreescribe al abrir */
 }
 
 .letter {
@@ -237,6 +265,9 @@ body::before {
   position: relative;
   padding: var(--space-2xl) var(--space-m);
   z-index: 1;
+
+  /* ── La carta empieza invisible ─────────────────────────────────────────────── */
+  opacity: 0;
 }
 
 .letter_title {
@@ -296,20 +327,124 @@ body::before {
     var(--light-pink) 45%,
     var(--light-pink) 100%
   );
-
-  display: none;
 }
 
 .hint-to-action__tap {
   margin-bottom: var(--space-m);
 }
 
-.hint-to-action__scroll {
-  display: none;
+/* ── Transiciones de opacidad para el hint-tap ─────────────────────────────── */
+#hint-to-action__tap {
+  transition: opacity 900ms ease;
+}
+
+/* ── Hint-scroll empieza oculto ─────────────────────────────────────────────── */
+#hint-to-action__scroll {
+  opacity: 0;
+  transition: opacity 600ms ease;
+}
+
+/* INFORMATION */
+
+.invitation-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  padding-top: 164px;
+  padding-bottom: 164px;
+
+  gap: var(--space-2xl);
+}
+
+.invitation-info__subsection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  gap: var(--space-l);
+}
+
+.invitation-info__txt {
+  width: calc(100dvw - var(--space-l));
+  max-width: 600px;
+}
+
+.invitation-info__txt-strong {
+  font-weight: 700;
+}
+
+.invitation-info__txt-age-limit {
+  font-style: italic;
+  font-size: var(--font-size-s);
+}
+
+/* IMAGES */
+
+.invitation-img__hotel {
+  width: calc(100dvw - var(--space-m));
+  max-width: 1100px;
+}
+
+.invitation-img__toast {
+  width: 85px;
+}
+
+.invitation-img__rings {
+  width: 111px;
+}
+
+.invitation-info__subsection-party {
+  position: relative;
+  padding: calc(var(--space-2xl) * 2) 0;
+}
+
+.invitation-img__music {
+  width: 66px;
+  rotate: 20.18deg;
+
+  position: absolute;
+  left: var(--space-l);
+  top: var(--space-l);
+}
+
+.invitation-img__mask {
+  width: 104px;
+  rotate: 15deg;
+
+  position: absolute;
+  right: var(--space-l);
+  top: 0;
+}
+
+.invitation-img__bengal {
+  width: 94px;
+  rotate: -25deg;
+
+  position: absolute;
+  left: var(--space-l);
+  bottom: var(--space-l);
+}
+
+.invitation-img__disco_ball {
+  width: 155px;
+  rotate: 15deg;
+
+  position: absolute;
+  right: var(--space-l);
+  bottom: 0;
 }
 
 .signature {
   font-family: var(--signature-font);
+  font-size: var(--font-size-4xl);
+  line-height: var(--font-size-4xl);
+
+  margin-top: var(--space-m);
+}
+
+.not-displayed {
+  display: none;
 }
 
 /* ------------------------------- */
@@ -331,6 +466,7 @@ body::before {
     --font-size-3xl: 2.074rem; /* 58.06px */
     --font-size-4xl: 2.488rem; /* 69.67px */
     --font-size-5xl: 2.986rem; /* 83.61px */
+    --font-size-6xl: 3.58rem; /* 83.61px */
   }
 
   .main:after {
@@ -346,5 +482,100 @@ body::before {
 
   .language-card:last-child {
     clip-path: url(#clip-card-frame-rotated-lg);
+  }
+
+  .language-card__xs {
+    width: 64px;
+    height: 72px;
+    clip-path: url(#clip-card-frame-xs);
+
+    position: fixed;
+    top: var(--space-m);
+    right: var(--space-l);
+    z-index: 3;
+  }
+
+  .envelope-container {
+    width: 583px;
+    top: calc(50dvh - 250px);
+    right: calc(50dvw - (583px / 1.4));
+  }
+
+  .envelope-container--final-position {
+    left: calc(50dvw - (583px / 1.4));
+    transform: translateX(0);
+  }
+
+  .envelope-top-back {
+    bottom: 426px;
+  }
+
+  .letter {
+    background-image: url(../assets/img/card-lg.png);
+
+    width: 492px;
+    max-width: 492px;
+    height: 650px;
+    left: calc(50vw - (492px / 1.4));
+    top: var(--space-2xl);
+
+    padding-left: calc(var(--space-m) + var(--space-s));
+    padding-right: calc(var(--space-m) + var(--space-s));
+  }
+
+  .letter_title {
+    font-size: var(--font-size-s);
+  }
+
+  .letter_date {
+    font-size: var(--font-size-s);
+  }
+
+  .letter_place {
+    font-size: var(--font-size-s);
+  }
+
+  .letter_names {
+    margin-bottom: calc(var(--space-s) + var(--space-m));
+  }
+
+  .letter_text {
+    font-size: var(--font-size-m);
+    margin-bottom: var(--space-m);
+  }
+
+  .hint-to-action {
+    padding-top: var(--space-2xl);
+    padding-bottom: var(--space-xl);
+  }
+
+  .invitation-info__txt-age-limit {
+    font-size: var(--font-size-m);
+  }
+
+  /* IMAGES */
+
+  .invitation-info__subsection-party {
+    padding: var(--space-xl) 0;
+  }
+
+  .invitation-img__music {
+    left: calc(var(--space-xl) * -2);
+    top: calc(var(--space-s) * -1);
+  }
+
+  .invitation-img__mask {
+    right: calc(var(--space-2xl) * -2.5);
+    top: calc(100% - var(--space-2xl) * 2);
+  }
+
+  .invitation-img__bengal {
+    left: calc(var(--space-xl) * -3);
+    bottom: calc(var(--space-s) * -1);
+  }
+
+  .invitation-img__disco_ball {
+    right: calc(var(--space-2xl) * -2);
+    bottom: calc(100% - var(--space-xl) * 1.5);
   }
 }
