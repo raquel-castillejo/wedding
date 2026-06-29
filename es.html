@@ -8,19 +8,9 @@
     />
 
     <!-- Google fonts -->
-    <link
-      rel="preconnect"
-      href="https://fonts.googleapis.com"
-    />
-    <link
-      rel="preconnect"
-      href="https://fonts.gstatic.com"
-      crossorigin
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Alegreya+Sans+SC:ital@0;1&family=Alegreya+Sans:ital@0;1&family=Italianno&display=swap"
-      rel="stylesheet"
-    />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alegreya+Sans+SC:ital,wght@0,400;0,700;1,400&family=Alegreya+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Italianno&display=swap" rel="stylesheet">
 
     <!-- CSS -->
 
@@ -65,7 +55,7 @@
       <!-- SECTION: SAVE THE DATE LETTER AND ENVELOPE -->
       <!-- ========================================== -->
 
-      <section class="letter-banner">
+      <section id="letter-banner" class="letter-banner">
         <div class="envelope-container">
           <img
             src="assets/img/envelope/envelope-bottom.png"
@@ -90,8 +80,7 @@
           <p class="letter_date">19 y 20 de junio de 2027</p>
           <p class="letter_place">Madrid, España</p>
           <p class="letter_text">
-            Nos encantaría que reserves este fin de semana para compartir con
-            nosotros este momento tan especial.
+            Nos encantaría que reserves este fin de semana para compartir con nosotros este momento tan especial.
           </p>
         </div>
 
@@ -122,68 +111,82 @@
       <!-- SECTION: DETAILS OF THE WEDDING -->
       <!-- =============================== -->
 
-      <section>
-        <div>
-          <p>
-            Prepárate, nos espera un fin de semana lleno de celebraciones y de
-            emociones en el lugar donde empezó todo, en Madrid.
+      <section id="invitation-info" class="invitation-info not-displayed">
+        <div class="invitation-info__subsection">
+          <p class="invitation-info__txt">
+            Prepárate, nos espera un fin de semana lleno de celebraciones y de emociones <strong class="invitation-info__txt-strong">en el lugar donde empezó todo, en Madrid.</strong>
           </p>
           <img
             src="assets/img/watercolor-hotel-640px.png"
             alt=""
+            class="invitation-img invitation-img__hotel"
           />
         </div>
 
-        <div>
-          <p>Tendremos la pre-boda el 19 de junio.</p>
+        <div class="invitation-info__subsection">
+          <p class="invitation-info__txt">Tendremos la pre-boda <strong class="invitation-info__txt-strong">el 19 de junio.</strong></p>
+          <img
+            src="assets/img/drawings/toast.png"
+            alt=""
+            class="invitation-img invitation-img__toast"
+          />
+        </div>
+
+        <div class="invitation-info__subsection">
+          <p class="invitation-info__txt"><strong class="invitation-info__txt-strong">Y el gran día será el 20 de junio.</strong></p>
           <img
             src="assets/img/drawings/rings.png"
             alt=""
+            class="invitation-img invitation-img__rings"
+
           />
         </div>
 
-        <div>
-          <p>Y el gran día será el 20 de junio.</p>
-          <img
-            src="assets/img/drawings/rings.png"
-            alt=""
-          />
-        </div>
+        <div class="invitation-info__subsection invitation-info__subsection-party">
 
-        <div>
-          <p>
-            Llena los bolsillos, bolsos y/o maletas con mucha alegría y energía
-            para el fin de semana. Pero no te olvides de reservar suficiente
-            batería para el día de la ceremonia.
-          </p>
-
-          <img
+            <img
             src="assets/img/drawings/music.png"
             alt=""
+            class="invitation-img invitation-img__music"
+
           />
 
           <img
             src="assets/img/drawings/mask.png"
             alt=""
+            class="invitation-img invitation-img__mask"
+
           />
+          <p class="invitation-info__txt">
+            Llena los bolsillos, bolsos y/o maletas con mucha alegría y energía para el fin de semana. Pero no te olvides de reservar suficiente batería para el día de la ceremonia.
+          </p>
+
+          <p class="invitation-info__txt invitation-info__txt-age-limit">Para que todos podamos disfrutar y desconectar, la fiesta será solo para adultos (+14 años). ¡Gracias por entenderlo! </p>
+
+        
 
           <img
             src="assets/img/drawings/bengal.png"
             alt=""
+            class="invitation-img invitation-img__bengal"
+
           />
 
           <img
             src="assets/img/drawings/disco ball.png"
             alt=""
+            class="invitation-img invitation-img__disco_ball"
           />
         </div>
 
-        <div>
-          <p>Pronto recibirás más información.</p>
+        <div class="invitation-info__subsection">
+          <p class="invitation-info__txt">Pronto recibirás más información.</p>
         </div>
 
-        <div id="signature" class="signature">Alisson & Marc Philipp</div>
+        <p id="signature" class="signature">Alisson & </br>Marc Philipp</p>
       </section>
     </main>
+
+     <script src="script/script.js"></script>
   </body>
 </html>
