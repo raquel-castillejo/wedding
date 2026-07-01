@@ -397,7 +397,6 @@ body::before {
 .invitation-info__subsection-party {
   position: relative;
   padding: calc(var(--space-2xl) * 2) 0;
-  /* margin-bottom: var(--space-l); */
 }
 
 .invitation-img__music {
@@ -424,7 +423,7 @@ body::before {
 
   position: absolute;
   left: var(--space-l);
-  bottom: var(--space-m);
+  bottom: calc(var(--space-m) * -1);
 }
 
 .invitation-img__disco_ball {
@@ -434,7 +433,6 @@ body::before {
   position: absolute;
   right: var(--space-l);
   bottom: calc(var(--space-l) * -1);
-
 }
 
 .signature {
