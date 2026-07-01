@@ -128,8 +128,8 @@ body::before {
   left: 0;
   top: 0;
 
-  height: 100dvh;
-  width: 100dvw;
+  height: 100vh;
+  width: 100vw;
   z-index: -1;
 
   background-image: url(../assets/img/hydrangeas-1000px.jpg);
@@ -397,6 +397,7 @@ body::before {
 .invitation-info__subsection-party {
   position: relative;
   padding: calc(var(--space-2xl) * 2) 0;
+  margin-bottom: var(--space-xl);
 }
 
 .invitation-img__music {
@@ -423,7 +424,7 @@ body::before {
 
   position: absolute;
   left: var(--space-l);
-  bottom: var(--space-l);
+  bottom: var(--space-m);
 }
 
 .invitation-img__disco_ball {
@@ -432,7 +433,7 @@ body::before {
 
   position: absolute;
   right: var(--space-l);
-  bottom: 0;
+  bottom: -32px;
 }
 
 .signature {
