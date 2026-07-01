@@ -432,7 +432,7 @@ body::before {
 
   position: absolute;
   right: var(--space-l);
-  bottom: calc(var(--space-l) * -1);
+  bottom: calc(var(--space-xl) * -1);
 }
 
 .signature {
