@@ -397,7 +397,7 @@ body::before {
 .invitation-info__subsection-party {
   position: relative;
   padding: calc(var(--space-2xl) * 2) 0;
-  margin-bottom: var(--space-l);
+  /* margin-bottom: var(--space-l); */
 }
 
 .invitation-img__music {
