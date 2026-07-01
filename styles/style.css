@@ -423,7 +423,7 @@ body::before {
 
   position: absolute;
   left: var(--space-l);
-  bottom: calc(var(--space-m) * -1);
+  bottom: calc(var(--space-s) * -1.5);
 }
 
 .invitation-img__disco_ball {
